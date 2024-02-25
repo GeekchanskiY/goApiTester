@@ -5,6 +5,8 @@ import (
 	"log"
 	"strings"
 
+	validators "ApiTester/Validators"
+
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -22,6 +24,10 @@ func main() {
 			log.Println(strings.Contains(input.Text, "a"))
 		}), widget.NewLabel("Hello World!"),
 	)
+
+	if validators.ValidateURL(input.Text) {
+
+	}
 
 	w.SetContent(content)
 	w.ShowAndRun()
