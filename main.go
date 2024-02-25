@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
@@ -18,7 +19,7 @@ func main() {
 	input.SetPlaceHolder("Enter text...")
 	content := container.NewVBox(
 		input, widget.NewButton("click me", func() {
-			log.Println(input.Text)
+			log.Println(strings.Contains(input.Text, "a"))
 		}), widget.NewLabel("Hello World!"),
 	)
 
