@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+
 	//"log"
 	//"strings"
 	"strconv"
 
 	// validators "ApiTester/Validators"
+	utils "ApiTester/Utils"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -20,6 +22,7 @@ func main() {
 	a := app.New()
 	defer a.Quit()
 	w := a.NewWindow("Hello World")
+
 	// URL Input
 	urlInput := widget.NewEntry()
 	urlInput.SetPlaceHolder("Enter URL")
@@ -47,6 +50,13 @@ func main() {
 		},
 	)
 
+	sidebar.OnSelected = func(id widget.ListItemID) {
+		// Handle click on specific item
+		// id here represents the index or identifier of the clicked item
+		fmt.Println("Clicked on item:", id)
+		utils.WriteFile(strconv.Itoa(id) + "_query.txt")
+	}
+
 	content := container.New(layout.NewVBoxLayout(),
 		container.NewGridWithColumns(2,
 			widget.NewLabel("URL:"),
@@ -65,10 +75,9 @@ func main() {
 
 	split := container.NewHSplit(content, sidebarContainer)
 
-	w.SetContent(split)
 	w.Resize(fyne.NewSize(600, 400))
 
-	w.SetContent(content)
+	w.SetContent(split)
 	w.ShowAndRun()
 
 }
