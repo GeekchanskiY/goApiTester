@@ -18,10 +18,12 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, world!")
+
+	var selectedMethod string = "GET"
+
 	a := app.New()
 	defer a.Quit()
-	w := a.NewWindow("Hello World")
+	w := a.NewWindow("ApiTester")
 
 	// URL Input
 	urlInput := widget.NewEntry()
@@ -34,9 +36,9 @@ func main() {
 	})
 
 	// Output Labels
-	outputLabel1 := widget.NewLabel("Output 1")
-	outputLabel2 := widget.NewLabel("Output 2")
-	outputLabel3 := widget.NewLabel("Output 3")
+	outputLabel1 := widget.NewLabel("Status code")
+	outputLabel2 := widget.NewLabel("Execution time")
+	outputLabel3 := widget.NewLabel("Params")
 
 	sidebar := widget.NewList(
 		func() int {
@@ -54,7 +56,10 @@ func main() {
 		// Handle click on specific item
 		// id here represents the index or identifier of the clicked item
 		fmt.Println("Clicked on item:", id)
-		utils.WriteFile(strconv.Itoa(id) + "_query.txt")
+
+		if selectedMethod == "GET" {
+			utils.ReadFile(strconv.Itoa(id) + "_query.txt")
+		}
 	}
 
 	content := container.New(layout.NewVBoxLayout(),
