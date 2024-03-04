@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	//"log"
 	//"strings"
 	"strconv"
 
 	// validators "ApiTester/Validators"
+	requests "ApiTester/Requests"
 	utils "ApiTester/Utils"
 
 	"fyne.io/fyne/v2"
@@ -68,6 +70,16 @@ func main() {
 			urlInput,
 			widget.NewLabel("Method:"),
 			methodChoice,
+			widget.NewButton("Proceed request", func() {
+				r := requests.NewRequest(
+					"test",
+					"http://www.google.com/",
+					"get",
+				)
+
+				log.Println(r.ProceedRequest())
+				log.Println("Proceeding request")
+			}),
 		),
 		container.NewGridWithColumns(1,
 			outputLabel1,

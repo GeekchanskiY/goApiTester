@@ -28,3 +28,9 @@ func ReadFile(filepath string) string {
 	}
 	return string(data)
 }
+
+func GetAllIDS() []int {
+	var res []int
+
+	return res
+}
