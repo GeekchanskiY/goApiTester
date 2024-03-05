@@ -1,5 +1,10 @@
 package validators
 
-func ValidateURL(url string) bool {
+import (
+	requests "ApiTester/Requests"
+)
+
+func ValidateRequest(r requests.Request) bool {
+
 	return true
 }

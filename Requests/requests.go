@@ -1,6 +1,7 @@
 package requests
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -16,12 +17,12 @@ type BodyItem struct {
 }
 
 type Request struct {
-	Name   string `json:"Name"`
-	Adress string `json:"Adress"`
-	Method string `json:"Method"`
-
-	Headers []HeaderItem `json:"Headers"`
-	Body    []BodyItem   `json:"Body"`
+	Name     string       `json:"Name"`
+	Protocol string       `json:"Protocol"`
+	Adress   string       `json:"Adress"`
+	Method   string       `json:"Method"`
+	Headers  []HeaderItem `json:"Headers"`
+	Body     []BodyItem   `json:"Body"`
 }
 
 func NewRequest(name, adress, method string) *Request {
@@ -47,19 +48,17 @@ func NewHeaderItem(name, value string) *HeaderItem {
 }
 
 func (v *Request) ProceedRequest() (*http.Response, error) {
-	var res *http.Response
+	var res *http.Response = nil
 	var err error = nil
 	switch v.Method {
 	case "get":
-
-	default:
-
-	}
-	if v.Method == "get" {
 		res, err = http.Get(v.Adress)
 		if err != nil {
 			fmt.Printf("error making http request: %s\n", err)
 		}
+	default:
+		err = errors.New("Incorrect ")
 	}
+
 	return res, err
 }
